@@ -12,7 +12,8 @@ This script will install Home Assistant unattended.
 
 #### Ubuntu 16.04 LTS +
 ```bash
-cd /root/
+mkdir /home/homeassistant
+cd /home/homeassistant
 wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/home-assistant-auto-install.bash && chmod +x ha-install && ./ha-install
 ```
 
