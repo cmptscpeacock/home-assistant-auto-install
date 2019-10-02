@@ -44,7 +44,7 @@ python3 -m pip install homeassistant
 
 # setup home assistant service
 
-wget -O home-assistant@homeassistant https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/home-assistantAThomeassistant
+wget -O home-assistant@homeassistant https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/home-assistantAThomeassistant.service
 mv home-assistant@homeassistant /etc/systemd/system/home-assistant@homeassistant.service
 sudo systemctl enable home-assistant@homeassistant
 
