@@ -23,7 +23,7 @@ clear
 
 ## Perform apt update
 
-#sudo apt update -y --force-yes && apt upgrade -y --force-yes
+sudo apt update -y --force-yes && apt upgrade -y --force-yes
 
 # install various utilities
 
