@@ -21,14 +21,14 @@ RESETUNDERLINE='\033[24m'
 ##(( EUID != 0 )) && exec homeassistant -- "$0" "$@"
 ##clear
 
-# create local file to prevent prompts when used with apt upgrade, , using sudo -i to prevent password request again
+# create local file to prevent prompts when used with apt upgrade
 
 wget -O local https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/local
-sudo -i mv local /etc/apt/apt.conf.d/local
+sudo mv local /etc/apt/apt.conf.d/local
 
 ## Perform apt update, using -i to prevent password request again
 
-sudo apt update -y && sudo apt upgrade -y
+sudo -i apt update -y && sudo apt upgrade -y
 
 # install various utilities
 
