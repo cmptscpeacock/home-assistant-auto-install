@@ -48,14 +48,14 @@ cd /home/homeassistant
 python3 -m venv homeassistant
 cd homeassistant
 source bin/activate
-pip install --user --upgrade pip
-python3 -m pip install --user homeassistant
+pip install --upgrade pip
+python3 -m pip install homeassistant
 
 # setup home assistant service
 
 wget -O home-assistant@homeassistant https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/home-assistantAThomeassistant.service
 sudo mv home-assistant@homeassistant /etc/systemd/system/home-assistant@homeassistant.service
-sudo -i -u homeassistant systemctl enable home-assistant@homeassistant
+sudo -i systemctl enable home-assistant@homeassistant
 
 ## output details
 
