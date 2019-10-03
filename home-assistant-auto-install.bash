@@ -18,21 +18,25 @@ RESETUNDERLINE='\033[24m'
 
 # execute as homeassistant
 
-#(( EUID != 0 )) && exec homeassistant -- "$0" "$@"
-clear
+##(( EUID != 0 )) && exec homeassistant -- "$0" "$@"
+##clear
 
-## Perform apt update
+## Perform apt update, using -i to prevent password request again
 
-sudo -u homeassistant apt update -y --force-yes && apt upgrade -y --force-yes
+sudo -i apt update -y && sudo apt upgrade -y
 
 # install various utilities
 
-sudo -u homeassistant apt install -y --force-yes python-pip python3-dev python3-pip python3-venv git ffmpeg nginx nmap cmake build-essential libssl-dev libffi-dev python-dev
+sudo apt install -y python-pip python3-dev python3-pip python3-venv git ffmpeg nginx nmap cmake build-essential libssl-dev libffi-dev python-dev
 
 # install setuptools and upgrade pip
 
-sudo -u homeassistant -H pip install setuptools
-sudo -u homeassistant -H pip install --upgrade pip
+sudo -H pip install setuptools
+sudo -H pip install --upgrade pip
+
+# change directory
+
+cd /home/homeassistant
 
 # install home assistant
 
@@ -45,8 +49,8 @@ python3 -m pip install homeassistant
 # setup home assistant service
 
 wget -O home-assistant@homeassistant https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/home-assistantAThomeassistant.service
-mv home-assistant@homeassistant /etc/systemd/system/home-assistant@homeassistant.service
-sudo -u homeassistant systemctl enable home-assistant@homeassistant
+sudo mv home-assistant@homeassistant /etc/systemd/system/home-assistant@homeassistant.service
+sudo systemctl enable home-assistant@homeassistant
 
 ## output details
 
