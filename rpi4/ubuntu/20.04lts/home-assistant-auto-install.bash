@@ -50,7 +50,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io bash jq curl avahi
 
 
 sudo su
-sudo curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/be010f288d3913cc7f753c2277e7b1bea1379e55/installer.sh | bash -s -- -m raspberrypi4-64
+sudo curl -sL https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi4/ubuntu/20.04lts/installer.sh | bash -s -- -m raspberrypi4-64
 
 # install various utilities
 
