@@ -2,7 +2,7 @@
 
 This script will install Home Assistant unattended.
 
-1. Once completed, the various URL is displayed at the end for your benefit to configure Home Assistant.
+1. Once completed, the Home Assistant URL is displayed at the end for your benefit to configure Home Assistant.
 
 2. Once everything has been installed and configured you will be able to immediately connect to Home Assistant using the URL as shown.
 
