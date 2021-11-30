@@ -1,4 +1,4 @@
-# Home Assistant Auto Installer (Virtual Environment Configuration)
+# Home Assistant Auto Installer
 
 This script will install Home Assistant unattended.
 
