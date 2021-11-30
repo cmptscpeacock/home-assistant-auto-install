@@ -35,7 +35,7 @@ sudo -i apt update -y && sudo apt upgrade -y
 
 printf "\n${RED}${UNDERLINE}Installing Docker${WHITE}${RESETUNDERLINE} \n\n"
 
-sudo apt-get install \
+sudo apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -47,7 +47,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io bash jq curl avahi-daemon dbus
 
 # install home assistant supervisor
