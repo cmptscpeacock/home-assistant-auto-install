@@ -26,7 +26,7 @@ RESETUNDERLINE='\033[24m'
 wget -O local https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/local
 sudo mv local /etc/apt/apt.conf.d/local
 
-## Perform apt update
+## perform apt update
 
 sudo -i apt update -y && sudo apt upgrade -y
 
