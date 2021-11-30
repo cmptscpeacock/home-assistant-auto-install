@@ -23,7 +23,7 @@ wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/ho
 ### Raspberry Pi4-64
 #### Ubuntu 20.04 LTS
 
-This installs Home Assistant - Supervisor running on Ubuntu as set out here: https://github.com/home-assistant/supervised-installer
+This installs Home Assistant - Supervisor running on Ubuntu as set out here: https://github.com/home-assistant/supervised-installer/tree/be010f288d3913cc7f753c2277e7b1bea1379e55
 
 ```bash
 sudo su
