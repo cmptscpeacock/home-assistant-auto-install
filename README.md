@@ -10,6 +10,7 @@ This script will install Home Assistant unattended.
 
 4. The script can be invoked using:
 
+### Orange Pi
 #### Ubuntu 16.04 LTS +
 ```bash
 cd /home/homeassistant
