@@ -33,6 +33,8 @@ sudo -i apt update -y && sudo apt upgrade -y
 
 # install docker
 
+printf "\n${RED}${UNDERLINE}Installing Docker${WHITE}${RESETUNDERLINE} \n\n"
+
 sudo apt-get install \
     ca-certificates \
     curl \
@@ -50,7 +52,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io bash jq curl avahi
 
 # install home assistant supervisor
 
-sudo su
+printf "\n${RED}${UNDERLINE}Installing Home Assistant Supervisor${WHITE}${RESETUNDERLINE} \n\n"
+
 sudo curl -sL https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi4/ubuntu/20.04lts/installer.sh | bash -s -- -m raspberrypi4-64
 
 ## output details

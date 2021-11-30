@@ -20,6 +20,7 @@ wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/ho
 ### Raspberry Pi4-64
 #### Ubuntu 20.04 LTS
 ```bash
+sudo su
 wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi4/ubuntu/20.04lts/home-assistant-auto-install.bash && chmod +x ha-install && ./ha-install
 ```
 
