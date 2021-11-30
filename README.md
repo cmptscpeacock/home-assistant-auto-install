@@ -2,9 +2,9 @@
 
 This script will install Home Assistant unattended.
 
-1. Once completed, the various URLs + credentials are displayed at the end for your benefit to configure Home Assistant. It is recommended to change these immediately due to being shown in clear text.
+1. Once completed, the various URL is displayed at the end for your benefit to configure Home Assistant.
 
-2. Once everything has been installed and configured you will be able to immediately connect to Home Assistant using the URL and credentials as shown.
+2. Once everything has been installed and configured you will be able to immediately connect to Home Assistant using the URL as shown.
 
 3. No support is provided and no liability is accepted in the event of adverse outcome with the use of the script. If you choose to use it, it is your responsibility to test it before using.
 
@@ -12,6 +12,9 @@ This script will install Home Assistant unattended.
 
 ### Orange Pi
 #### Ubuntu 16.04 LTS +
+
+This installs Home Assistant in a Virtual Environment on Ubuntu.
+
 ```bash
 cd /home/homeassistant
 wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/orangepi/ubuntu/16.04lts/home-assistant-auto-install.bash && chmod +x ha-install && ./ha-install
@@ -20,7 +23,7 @@ wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/ho
 ### Raspberry Pi4-64
 #### Ubuntu 20.04 LTS
 
-This is Home Assistant - Supervisor running on Ubuntu as set out here: https://github.com/home-assistant/supervised-installer
+This installs Home Assistant - Supervisor running on Ubuntu as set out here: https://github.com/home-assistant/supervised-installer
 
 ```bash
 sudo su
