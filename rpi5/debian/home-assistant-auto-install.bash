@@ -42,7 +42,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 printf "\n${RED}${UNDERLINE}Installing Home Assistant - Supervisor${WHITE}${RESETUNDERLINE} \n\n"
 # This installer script is designed for specific Raspberry Pi models.
 # The `raspberrypi4-64` model is the closest match for the RPi5 64-bit architecture.
-sudo curl -sL https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi4/ubuntu/20.04lts/installer.sh | bash -s -- -m raspberrypi4-64
+sudo curl -sL https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/installer.sh | bash -s -- -m raspberrypi4-64
 
 # Output details
 ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)

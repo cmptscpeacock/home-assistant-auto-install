@@ -9,11 +9,11 @@ DOCKER_BINARY=/usr/bin/docker
 DOCKER_REPO=homeassistant
 DOCKER_SERVICE=docker.service
 URL_VERSION="https://version.home-assistant.io/stable.json"
-URL_HA="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/20.04lts/files/ha"
-URL_BIN_HASSIO="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/20.04lts/files/hassio-supervisor"
-URL_BIN_APPARMOR="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/20.04lts/files/hassio-apparmor"
-URL_SERVICE_HASSIO="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/20.04lts/files/hassio-supervisor.service"
-URL_SERVICE_APPARMOR="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/20.04lts/files/hassio-apparmor.service"
+URL_HA="https://raw.githubusercontent.com/home-assistant/supervised-installer/master/files/ha"
+URL_BIN_HASSIO="https://raw.githubusercontent.com/home-assistant/supervised-installer/master/files/hassio-supervisor"
+URL_BIN_APPARMOR="https://raw.githubusercontent.com/home-assistant/supervised-installer/master/files/hassio-apparmor"
+URL_SERVICE_HASSIO="https://raw.githubusercontent.com/home-assistant/supervised-installer/master/files/hassio-supervisor.service"
+URL_SERVICE_APPARMOR="https://raw.githubusercontent.com/home-assistant/supervised-installer/master/files/hassio-apparmor.service"
 URL_APPARMOR_PROFILE="https://version.home-assistant.io/apparmor.txt"
 
 # Check env
@@ -25,7 +25,6 @@ command -v avahi-daemon > /dev/null 2>&1 || error "Please install avahi first"
 command -v dbus-daemon > /dev/null 2>&1 || error "Please install dbus first"
 command -v nmcli > /dev/null 2>&1 || warn "No NetworkManager support on host."
 command -v apparmor_parser > /dev/null 2>&1 || warn "No AppArmor support on host."
-
 
 # Check if Modem Manager is enabled
 if systemctl list-unit-files ModemManager.service | grep enabled; then
@@ -86,21 +85,21 @@ case $ARCH in
         HASSIO_DOCKER="$DOCKER_REPO/amd64-hassio-supervisor"
     ;;
     "arm" |"armv6l")
-        if [ -z $MACHINE ]; then
+        if [ -z "$MACHINE" ]; then
             error "Please set machine for $ARCH"
         fi
         HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/armhf-hassio-supervisor"
     ;;
     "armv7l")
-        if [ -z $MACHINE ]; then
+        if [ -z "$MACHINE" ]; then
             error "Please set machine for $ARCH"
         fi
         HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
         HASSIO_DOCKER="$DOCKER_REPO/armv7-hassio-supervisor"
     ;;
     "aarch64")
-        if [ -z $MACHINE ]; then
+        if [ -z "$MACHINE" ]; then
             error "Please set machine for $ARCH"
         fi
         HOMEASSISTANT_DOCKER="$DOCKER_REPO/$MACHINE-homeassistant"
@@ -127,7 +126,7 @@ if [ ! -d "$DATA_SHARE" ]; then
 fi
 
 # Read infos from web
-HASSIO_VERSION=$(curl -s $URL_VERSION | jq -e -r '.supervisor')
+HASSIO_VERSION=$(curl -s "$URL_VERSION" | jq -e -r '.supervisor')
 
 ##
 # Write configuration
@@ -148,10 +147,10 @@ docker tag "$HASSIO_DOCKER:$HASSIO_VERSION" "$HASSIO_DOCKER:latest" > /dev/null
 ##
 # Install Hass.io Supervisor
 echo "[Info] Install supervisor startup scripts"
-curl -sL ${URL_BIN_HASSIO} > "${PREFIX}/sbin/hassio-supervisor"
-curl -sL ${URL_SERVICE_HASSIO} > "${SYSCONFDIR}/systemd/system/hassio-supervisor.service"
+curl -sL "$URL_BIN_HASSIO" > "${PREFIX}/sbin/hassio-supervisor"
+curl -sL "$URL_SERVICE_HASSIO" > "${SYSCONFDIR}/systemd/system/hassio-supervisor.service"
 
-sed -i "s,%%HASSIO_CONFIG%%,${CONFIG},g" "${PREFIX}"/sbin/hassio-supervisor
+sed -i "s,%%HASSIO_CONFIG%%,${CONFIG},g" "${PREFIX}/sbin/hassio-supervisor"
 sed -i -e "s,%%DOCKER_BINARY%%,${DOCKER_BINARY},g" \
        -e "s,%%DOCKER_SERVICE%%,${DOCKER_SERVICE},g" \
        -e "s,%%HASSIO_BINARY%%,${PREFIX}/sbin/hassio-supervisor,g" \
@@ -165,14 +164,14 @@ systemctl enable hassio-supervisor.service
 if command -v apparmor_parser > /dev/null 2>&1; then
     echo "[Info] Install AppArmor scripts"
     mkdir -p "${DATA_SHARE}/apparmor"
-    curl -sL ${URL_BIN_APPARMOR} > "${PREFIX}/sbin/hassio-apparmor"
-    curl -sL ${URL_SERVICE_APPARMOR} > "${SYSCONFDIR}/systemd/system/hassio-apparmor.service"
-    curl -sL ${URL_APPARMOR_PROFILE} > "${DATA_SHARE}/apparmor/hassio-supervisor"
+    curl -sL "$URL_BIN_APPARMOR" > "${PREFIX}/sbin/hassio-apparmor"
+    curl -sL "$URL_SERVICE_APPARMOR" > "${SYSCONFDIR}/systemd/system/hassio-apparmor.service"
+    curl -sL "$URL_APPARMOR_PROFILE" > "${DATA_SHARE}/apparmor/hassio-supervisor"
 
     sed -i "s,%%HASSIO_CONFIG%%,${CONFIG},g" "${PREFIX}/sbin/hassio-apparmor"
     sed -i -e "s,%%DOCKER_SERVICE%%,${DOCKER_SERVICE},g" \
-	   -e "s,%%HASSIO_APPARMOR_BINARY%%,${PREFIX}/sbin/hassio-apparmor,g" \
-	   "${SYSCONFDIR}/systemd/system/hassio-apparmor.service"
+       -e "s,%%HASSIO_APPARMOR_BINARY%%,${PREFIX}/sbin/hassio-apparmor,g" \
+       "${SYSCONFDIR}/systemd/system/hassio-apparmor.service"
 
     chmod a+x "${PREFIX}/sbin/hassio-apparmor"
     systemctl enable hassio-apparmor.service
@@ -187,5 +186,5 @@ systemctl start hassio-supervisor.service
 ##
 # Setup CLI
 echo "[Info] Install cli 'ha'"
-curl -sL ${URL_HA} > "${PREFIX}/bin/ha"
+curl -sL "$URL_HA" > "${PREFIX}/bin/ha"
 chmod a+x "${PREFIX}/bin/ha"
