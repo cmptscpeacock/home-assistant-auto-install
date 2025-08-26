@@ -30,6 +30,17 @@ sudo su
 wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi4/ubuntu/20.04lts/home-assistant-auto-install.bash && chmod +x ha-install && ./ha-install
 ```
 
+### Raspberry Pi5-64
+#### Debian
+
+This installs Home Assistant - Supervisor running on Debian.
+
+```bash
+sudo su
+wget --no-cache -O ha-install https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/home-assistant-auto-install.bash && chmod +x ha-install && ./ha-install
+```
+
+
 ## Copyright & Credit
 
 ### Home Assistant
