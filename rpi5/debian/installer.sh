@@ -8,7 +8,8 @@ ARCH=$(uname -m)
 DOCKER_BINARY=/usr/bin/docker
 DOCKER_REPO=homeassistant
 DOCKER_SERVICE=docker.service
-URL_VERSION="https://version.home-assistant.io/stable.json"
+# FIX: Hard-code a known good version instead of pulling from the API
+HASSIO_VERSION="2024.10.0" 
 URL_HA="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/files/ha"
 URL_BIN_HASSIO="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/files/hassio-supervisor"
 URL_BIN_APPARMOR="https://raw.githubusercontent.com/cmptscpeacock/home-assistant-auto-install/master/rpi5/debian/files/hassio-apparmor"
@@ -125,8 +126,8 @@ if [ ! -d "$DATA_SHARE" ]; then
     mkdir -p "$DATA_SHARE"
 fi
 
-# Read infos from web
-HASSIO_VERSION=$(curl -s "$URL_VERSION" | jq -e -r '.supervisor')
+# The API call is commented out as we're using a hard-coded version
+# HASSIO_VERSION=$(curl -s "$URL_VERSION" | jq -e -r '.supervisor')
 
 ##
 # Write configuration
